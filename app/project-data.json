@@ -1,0 +1,39 @@
+{
+  "projects": [
+    {
+      "name": "Customer Portal Redesign",
+      "owner": "Frontend Team",
+      "status": "active",
+      "recentActivity": "Updated 2 hours ago",
+      "priority": "high"
+    },
+    {
+      "name": "API Performance Optimization",
+      "owner": "Backend Team",
+      "status": "active",
+      "recentActivity": "Code review completed",
+      "priority": "high"
+    },
+    {
+      "name": "Mobile App v2.0",
+      "owner": "Mobile Team",
+      "status": "active",
+      "recentActivity": "Beta testing in progress",
+      "priority": "medium"
+    },
+    {
+      "name": "Legacy System Migration",
+      "owner": "Infrastructure Team",
+      "status": "paused",
+      "recentActivity": "Waiting for stakeholder approval",
+      "priority": "medium"
+    },
+    {
+      "name": "Q3 Analytics Dashboard",
+      "owner": "Data Team",
+      "status": "completed",
+      "recentActivity": "Deployed to production",
+      "priority": "low"
+    }
+  ]
+}

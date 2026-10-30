@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Pulse</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="dashboard">
+        <header class="dashboard-header">
+            <h1 class="dashboard-title">Project Pulse</h1>
+        </header>
+        <main class="dashboard-main">
+            <section class="projects-grid" id="projectsContainer">
+                <!-- Project cards will be dynamically inserted here -->
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Fetch and parse project data
+        async function loadProjects() {
+            try {
+                const response = await fetch('project-data.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+                renderProjects(data.projects);
+            } catch (error) {
+                console.error('Error loading project data:', error);
+            }
+        }
+
+        // Render project cards
+        function renderProjects(projects) {
+            const container = document.getElementById('projectsContainer');
+            
+            projects.forEach(project => {
+                const card = document.createElement('article');
+                card.className = 'project-card';
+                card.innerHTML = `
+                    <div class="project-card-header">
+                        <h2 class="project-card-title card-name">${escapeHtml(project.name)}</h2>
+                        <div class="project-card-badges">
+                            <span class="card-status status-${project.status}">${project.status}</span>
+                            <span class="card-priority priority-${project.priority}">${project.priority}</span>
+                        </div>
+                    </div>
+                    <div class="project-card-body">
+                        <p class="project-card-description card-owner">${escapeHtml(project.owner)}</p>
+                        <div class="card-meta">
+                            <p class="card-activity">${escapeHtml(project.recentActivity)}</p>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Helper function to escape HTML and prevent XSS
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Load projects when page loads
+        document.addEventListener('DOMContentLoaded', loadProjects);
+    </script>
+</body>
+</html>

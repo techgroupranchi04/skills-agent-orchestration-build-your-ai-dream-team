@@ -1,0 +1,483 @@
+/* ============================================================================
+   PROJECT PULSE DASHBOARD - STYLES
+   ============================================================================
+   Mobile-first responsive CSS for professional project management dashboard.
+   Follows visual design system from docs/project-pulse-design.md
+   ============================================================================ */
+
+/* ============================================================================
+   1. RESET & GLOBAL STYLES
+   ============================================================================ */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-dashboard);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+  line-height: 1.2;
+}
+
+/* ============================================================================
+   2. CSS CUSTOM PROPERTIES (VARIABLES)
+   ============================================================================ */
+
+:root {
+  /* ---- Colors: Text ---- */
+  --color-text-primary: #111827;
+  --color-text-secondary: #4B5563;
+  --color-text-tertiary: #6B7280;
+
+  /* ---- Colors: Background ---- */
+  --color-bg-dashboard: #F9FAFB;
+  --color-bg-card: #FFFFFF;
+  --color-border: #E5E7EB;
+
+  /* ---- Colors: Status badges ---- */
+  --color-status-active: #10B981;
+  --color-status-completed: #6B7280;
+  --color-status-paused: #F59E0B;
+
+  /* ---- Colors: Priority badges ---- */
+  --color-priority-high: #EF4444;
+  --color-priority-medium: #F97316;
+  --color-priority-low: #3B82F6;
+
+  /* ---- Spacing ---- */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-lg: 16px;
+  --space-xl: 20px;
+  --space-2xl: 24px;
+
+  /* ---- Border radius ---- */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+
+  /* ---- Shadows ---- */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 8px 16px rgba(0, 0, 0, 0.12);
+
+  /* ---- Transitions ---- */
+  --transition-smooth: all 0.2s ease-out;
+}
+
+/* ============================================================================
+   3. DASHBOARD CONTAINER
+   ============================================================================ */
+
+.dashboard {
+  background-color: var(--color-bg-dashboard);
+  min-height: 100vh;
+  padding: var(--space-lg);
+}
+
+.dashboard-header {
+  margin-bottom: var(--space-2xl);
+}
+
+.dashboard-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  letter-spacing: -0.5px;
+  margin: 0;
+  margin-bottom: var(--space-lg);
+}
+
+.dashboard-subtitle {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--color-text-tertiary);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ---- Dashboard grid: mobile-first (single column) ---- */
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* ============================================================================
+   4. PROJECT CARD COMPONENT
+   ============================================================================ */
+
+.project-card {
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  transition: var(--transition-smooth);
+  cursor: pointer;
+}
+
+/* ---- Card hover state: lift and enhanced shadow ---- */
+.project-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+/* ---- Card header: title + badges ---- */
+.project-card-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.project-card-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  line-height: 1.4;
+  margin: 0;
+  word-break: break-word;
+}
+
+/* ---- Card badges container: status + priority side-by-side ---- */
+.project-card-badges {
+  display: flex;
+  flex-direction: row;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* ---- Card body: description + metadata ---- */
+.project-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  flex-grow: 1;
+  margin-bottom: var(--space-lg);
+}
+
+.project-card-description {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-word;
+}
+
+/* ============================================================================
+   5. CARD INNER SECTIONS: STATUS, PRIORITY, META
+   ============================================================================ */
+
+/* ---- Status badge (.card-status) ---- */
+.card-status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+  line-height: 1.4;
+  white-space: nowrap;
+  background-color: var(--color-bg-card);
+  color: var(--color-text-primary);
+}
+
+/* Status: Active (green) */
+.card-status.status-active {
+  background-color: var(--color-status-active);
+  color: #FFFFFF;
+}
+
+/* Status: Completed (gray) */
+.card-status.status-completed {
+  background-color: var(--color-status-completed);
+  color: #FFFFFF;
+}
+
+/* Status: Paused (amber) */
+.card-status.status-paused {
+  background-color: var(--color-status-paused);
+  color: #FFFFFF;
+}
+
+/* ---- Priority badge (.card-priority) ---- */
+.card-priority {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+  line-height: 1.4;
+  white-space: nowrap;
+  background-color: var(--color-bg-card);
+  color: var(--color-text-primary);
+}
+
+/* Priority: High (red) */
+.card-priority.priority-high {
+  background-color: var(--color-priority-high);
+  color: #FFFFFF;
+}
+
+/* Priority: Medium (orange) */
+.card-priority.priority-medium {
+  background-color: var(--color-priority-medium);
+  color: #FFFFFF;
+}
+
+/* Priority: Low (blue) */
+.card-priority.priority-low {
+  background-color: var(--color-priority-low);
+  color: #FFFFFF;
+}
+
+/* ---- Metadata section (.card-meta) ---- */
+.card-meta {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--space-lg);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-text-tertiary);
+  line-height: 1.5;
+}
+
+.card-meta-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.card-meta-label {
+  font-weight: 600;
+  color: var(--color-text-tertiary);
+}
+
+.card-meta-value {
+  font-weight: 400;
+  color: var(--color-text-secondary);
+}
+
+/* ---- Recent activity text styling (.card-activity) ---- */
+.card-activity {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--color-text-tertiary);
+  line-height: 1.5;
+  margin: 0;
+  font-style: italic;
+}
+
+/* ============================================================================
+   6. RESPONSIVE MEDIA QUERIES - TABLET (768px+)
+   ============================================================================ */
+
+@media (min-width: 768px) {
+  .dashboard {
+    padding: var(--space-xl);
+  }
+
+  .dashboard-title {
+    font-size: 28px;
+  }
+
+  /* ---- Tablet grid: 2 columns ---- */
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-lg);
+  }
+
+  .project-card {
+    padding: var(--space-xl);
+  }
+
+  .project-card-title {
+    font-size: 16px;
+  }
+}
+
+/* ============================================================================
+   7. RESPONSIVE MEDIA QUERIES - DESKTOP (1024px+)
+   ============================================================================ */
+
+@media (min-width: 1024px) {
+  .dashboard {
+    padding: var(--space-2xl);
+  }
+
+  .dashboard-title {
+    font-size: 32px;
+    margin-bottom: var(--space-xl);
+  }
+
+  /* ---- Desktop grid: 3+ columns with auto-fit ---- */
+  .projects-grid {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--space-xl);
+  }
+
+  .project-card {
+    padding: var(--space-xl);
+  }
+
+  .project-card-title {
+    font-size: 18px;
+  }
+
+  .project-card-description {
+    font-size: 14px;
+  }
+
+  .card-status,
+  .card-priority {
+    font-size: 13px;
+  }
+
+  .card-meta {
+    font-size: 13px;
+  }
+}
+
+/* ============================================================================
+   8. LARGE DESKTOP (1400px+)
+   ============================================================================ */
+
+@media (min-width: 1400px) {
+  .projects-grid {
+    max-width: 1400px;
+  }
+}
+
+/* ============================================================================
+   9. ACCESSIBILITY UTILITIES & MOTION PREFERENCES
+   ============================================================================ */
+
+/* ---- Screen reader only text (sr-only) ---- */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* ---- Respect user's motion preferences ---- */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .project-card {
+    transition: none;
+  }
+
+  .project-card:hover {
+    transform: none;
+  }
+}
+
+/* ============================================================================
+   10. DARK MODE STRUCTURE (Optional, for future use)
+   ============================================================================ */
+
+@media (prefers-color-scheme: dark) {
+  /* Placeholder for future dark mode implementation */
+  /* Uncomment and implement when dark theme is required */
+  /*
+  :root {
+    --color-text-primary: #F3F4F6;
+    --color-text-secondary: #D1D5DB;
+    --color-text-tertiary: #9CA3AF;
+    --color-bg-dashboard: #111827;
+    --color-bg-card: #1F2937;
+    --color-border: #374151;
+  }
+  */
+}
+
+/* ============================================================================
+   11. PRINT STYLES (Optional)
+   ============================================================================ */
+
+@media print {
+  body {
+    background-color: #FFFFFF;
+  }
+
+  .dashboard {
+    padding: 0;
+    background-color: #FFFFFF;
+  }
+
+  .project-card {
+    box-shadow: none;
+    border: 1px solid #D1D5DB;
+    page-break-inside: avoid;
+  }
+
+  .project-card:hover {
+    box-shadow: none;
+    transform: none;
+  }
+}
+
+/* ============================================================================
+   12. FOCUS & INTERACTIVE STATES
+   ============================================================================ */
+
+/* ---- Visible focus ring for keyboard navigation ---- */
+.project-card:focus-visible {
+  outline: 2px solid var(--color-priority-low);
+  outline-offset: 2px;
+}
+
+/* ---- Link focus state (if cards are clickable) ---- */
+a:focus-visible {
+  outline: 2px solid var(--color-priority-low);
+  outline-offset: 2px;
+}
+
+/* ============================================================================
+   END OF STYLES
+   ============================================================================ */
