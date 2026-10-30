@@ -6,7 +6,7 @@
       "type": "python",
       "request": "launch",
       "module": "http.server",
-      "args": ["5500"],
+      "args": ["8001"],
       "cwd": "${workspaceFolder}/app",
       "console": "integratedTerminal",
       "serverReadyAction": {
